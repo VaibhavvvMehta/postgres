@@ -209,13 +209,3 @@ FROM product_revenue
 WHERE revenue > (
     SELECT AVG(revenue) FROM product_revenue
 );
-
-
-from django.db.models import Sum
-from database.models import Product
-
-qs = Product.objects.annotate(
-    revenue=Sum("orderitem__quantity")
-).order_by("-revenue")
-
-print(qs.query)
